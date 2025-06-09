@@ -56,7 +56,6 @@ cd Teeru
 2. Install Dependencies
 yarn install
 or if you're using npm:
-
 npm install
 3. Create .env File
 Duplicate .env.example and rename it to .env. Fill in your environment variables:
