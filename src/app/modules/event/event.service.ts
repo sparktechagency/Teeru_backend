@@ -69,12 +69,25 @@ const getUpcomingEventOfSpecificUser = async (userId: string) => {
     .filter(ticket => ticket.eventId)
     .map(ticket => ticket.eventId);
 
-     // Sort events by date (ascending order)
+  // Sort by date and time (earliest to latest)
   const sortedUpcomingEvents = upcomingEvents.sort((a, b) => {
-    return new Date(a.date).getTime() - new Date(b.date).getTime();
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    
+    // If the dates are the same, sort by time
+    if (dateA === dateB) {
+      const timeA = a.time.split(':').map(Number); // Assuming time is in "HH:mm" format
+      const timeB = b.time.split(':').map(Number);
+      
+      // Compare hours and then minutes if hours are the same
+      if (timeA[0] === timeB[0]) {
+        return timeA[1] - timeB[1];
+      }
+      return timeA[0] - timeB[0];
+    }
+    
+    return dateA - dateB; // Sort by date if dates are different
   });
-
-
   return sortedUpcomingEvents;
 };
 
