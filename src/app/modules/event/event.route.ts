@@ -42,6 +42,8 @@ eventRoutes
   .patch(
     '/:id',
     auth('admin'),
+    upload.single('image'),
+    parseData(),
     eventController.updateEvent
   ) // Update event
 

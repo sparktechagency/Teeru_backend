@@ -76,7 +76,9 @@ const getUpcomingEventOfSpecificUser = catchAsync( async (req: Request, res: Res
 const updateEvent = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
 
-
+  if (req?.file) {
+        req.body.image = storeFile('event', req?.file?.filename);
+      }
   const updatedEvent = await eventService.updateEvent(id, req.body);
 
   sendResponse(res, {
