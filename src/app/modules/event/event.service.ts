@@ -65,7 +65,9 @@ const getAllEvents = async (query: Record<string, unknown>, filterFutureEvents: 
 };
 
 const getSpecificCategoryEvents = async (categoryId: string,query: Record<string, unknown>) => {
-  const eventQuery = new QueryBuilder(Event.find({ isDeleted: false, category: categoryId }).populate("category"), query)
+
+  const now = new Date(); // Get the current date and time
+  const eventQuery = new QueryBuilder(Event.find({ isDeleted: false, category: categoryId, date: { $gte: now } }).populate("category"), query)
     .search([]) // Add searchable fields if needed
     .filter()
     .sort()
