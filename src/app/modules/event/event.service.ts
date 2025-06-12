@@ -69,7 +69,13 @@ const getUpcomingEventOfSpecificUser = async (userId: string) => {
     .filter(ticket => ticket.eventId)
     .map(ticket => ticket.eventId);
 
-  return upcomingEvents;
+     // Sort events by date (ascending order)
+  const sortedUpcomingEvents = upcomingEvents.sort((a, b) => {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  });
+
+
+  return sortedUpcomingEvents;
 };
 
 const softDeleteEvent = async (id: string) => {
