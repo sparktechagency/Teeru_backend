@@ -10,6 +10,8 @@ type TTicketPrices = {
 };
 
 export interface IEvent {
+  image?: string;
+  description?: string;
   name: string;
   category: ObjectId; // could be a reference to Category
   date: Date;

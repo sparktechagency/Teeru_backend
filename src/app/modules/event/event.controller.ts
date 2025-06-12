@@ -3,10 +3,13 @@ import { eventService } from './event.service';
 import sendResponse from '../../utils/sendResponse';
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
+import { storeFile } from '../../utils/fileHelper';
 
 const createEvent = catchAsync(async (req: Request, res: Response) => {
 
-    
+  if (req?.file) {
+        req.body.image = storeFile('event', req?.file?.filename);
+      }
   req.body.isDeleted = false;
 
   const newEvent = await eventService.createEvent(req.body);

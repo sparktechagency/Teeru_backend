@@ -5,6 +5,16 @@ import { IEvent } from './event.interface';
 
 const EventSchema = new Schema<IEvent>(
   {
+    image: {
+      type: String,
+      required: true,
+      default: ''
+    },
+    description: {
+      type: String,
+      required: true,
+      default: ""
+    },
     name: {
       type: String,
       required: true,

@@ -6,7 +6,7 @@ import QueryBuilder from '../../builder/QueryBuilder';
 
 const createCategory = async (data: ICategory) => {
   // Check if the category already exists
-  const existingCategory = await Category.findOne({ name: data.name });
+  const existingCategory = await Category.findOne({ name: data.name , isDeleted: false });
   if (existingCategory) {
     throw new AppError(httpStatus.BAD_REQUEST, 'Category with this name already exists');
   }
