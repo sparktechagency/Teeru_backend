@@ -7,17 +7,17 @@ export const ticketRoutes = Router();
 ticketRoutes
  .post(
     "/buy",
-    auth("user"),
+    auth("user", 'admin'),
     ticketController.buyTicket
  )
 
 .get(
     "/myTickets",
-    auth("user"),
+    auth("user", 'admin'),
     ticketController.getUserTickets
 )
 
-.get(
-    "/:ticketId",
-    auth("")
-)
+// .get(
+//     "/:ticketId",
+//     auth("")
+// )

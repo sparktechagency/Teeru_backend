@@ -15,7 +15,7 @@ notificationRoutes
   )
   .get(
     '/all-notifications', 
-    auth('user'), 
+    auth('user', 'admin'), 
     notificationController.getAllNotifications
   )
 
@@ -27,7 +27,7 @@ notificationRoutes
 
   .patch(
     '/mark-read/:id', 
-    auth('user'), 
+    auth("user", "admin"), 
     notificationController.markAsRead
   )
 
@@ -40,6 +40,6 @@ notificationRoutes
   
   .delete(
     '/delete/:id', 
-    auth('user'), 
+    auth('user', 'admin'), 
     notificationController.deleteNotification
   );

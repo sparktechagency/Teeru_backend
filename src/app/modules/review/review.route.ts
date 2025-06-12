@@ -7,7 +7,7 @@ export const reviewRoutes = Router();
 reviewRoutes
  .post(
     "/add",
-    auth("user"),
+    auth("user", 'admin'),
     ReviewController.createReview
  )
 
