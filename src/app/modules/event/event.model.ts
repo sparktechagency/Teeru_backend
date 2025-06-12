@@ -10,7 +10,7 @@ const EventSchema = new Schema<IEvent>(
       required: true,
       default: ''
     },
-    description: {
+    head_to_head: {
       type: String,
       required: true,
       default: ""
