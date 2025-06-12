@@ -208,7 +208,7 @@ const changeRole = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: `User role changed successfully`,
-    data: null,
+    data: role,
   });
 });
 
