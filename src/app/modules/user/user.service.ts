@@ -623,6 +623,28 @@ const deleteMyAccount = async (id: string, payload: DeleteAccountPayload) => {
   return userDeleted;
 };
 
+const changeRole = async (id: string, role: string) => {
+  const singleUser = await User.IsUserExistById(id);
+
+  if (!singleUser) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  
+
+  const user = await User.findByIdAndUpdate(
+    id,
+    { role: role }, // Assuming you want to block the user here
+    { new: true },
+  );
+
+  if (!user) {
+    throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, 'Failed to role update the user');
+  }
+
+  return user;
+};
+
 const blockUser = async (id: string) => {
   const singleUser = await User.IsUserExistById(id);
 
@@ -683,6 +705,7 @@ export const userService = {
   getUserByEmail,
   updateUser,
   deleteMyAccount,
+  changeRole,
   blockUser,
   unblockUser,
   getAllUserQuery,

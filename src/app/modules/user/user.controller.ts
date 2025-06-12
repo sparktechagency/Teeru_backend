@@ -201,6 +201,17 @@ const blockUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const changeRole = catchAsync(async (req: Request, res: Response) => {
+  const {role} = req.body;
+  const result = await userService.changeRole(req.params.id, role);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `User role changed successfully`,
+    data: null,
+  });
+});
+
 const unblockUser = catchAsync(async (req: Request, res: Response) => {
   const result = await userService.unblockUser(req.params.id);
   sendResponse(res, {
@@ -231,6 +242,7 @@ export const userController = {
   getMyProfile,
   getAdminProfile,
   updateMyProfile,
+  changeRole,
   blockUser,
   unblockUser,
   deleteMyAccount,

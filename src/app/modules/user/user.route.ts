@@ -52,6 +52,8 @@ userRoutes
     userController.updateMyProfile,
   )
 
+  .patch('/changeRole/:id', auth('admin'), userController.changeRole)
+
   .patch('/block/:id', auth('admin'), userController.blockUser)
   
   .patch('/unblock/:id', auth('admin'), userController.unblockUser)
