@@ -23,6 +23,12 @@ eventRoutes
     eventController.getAllEvents
   ) // Get all events
 
+    .get(
+    '/all',
+    eventController.getAllEventss
+  ) // Get all events
+
+
   .get(
     "/upcoming",
     auth("user"),

@@ -19,8 +19,40 @@ const updateEvent = async (id: string, data: Partial<IEvent>) => {
   return updatedEvent;
 };
 
-const getAllEvents = async (query: Record<string, unknown>) => {
-  const eventQuery = new QueryBuilder(Event.find({ isDeleted: false }).populate("category"), query)
+const getAllEventss = async (query: Record<string, unknown>, filterFutureEvents: boolean = false) => {
+
+
+
+  const now = new Date(); // Get the current date and time
+
+  // Build the basic query object for events
+  const eventQueryObj: Record<string, unknown> = {
+    isDeleted: false,
+  };
+
+  // If filterFutureEvents is true, add the filter to show only events that are today or in the future
+  if (filterFutureEvents) {
+    eventQueryObj.date = { $gte: now }; // Only events from today onwards
+  }
+
+
+  const eventQuery = new QueryBuilder(Event.find(eventQueryObj).populate("category"), query)
+    .search([]) // Add searchable fields if needed
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await eventQuery.modelQuery;
+  const meta = await eventQuery.countTotal();
+  return { meta, result };
+};
+
+const getAllEvents = async (query: Record<string, unknown>, filterFutureEvents: boolean = false) => {
+
+  const eventQuery = new QueryBuilder(Event.find({
+    isDeleted: false,
+  }).populate("category"), query)
     .search([]) // Add searchable fields if needed
     .filter()
     .sort()
@@ -103,6 +135,7 @@ export const eventService = {
   createEvent,
   updateEvent,
   getAllEvents,
+  getAllEventss,
   getSpecificCategoryEvents,
   getUpcomingEventOfSpecificUser,
   getSpecificEvent,

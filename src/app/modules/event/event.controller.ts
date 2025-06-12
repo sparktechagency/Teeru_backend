@@ -23,12 +23,25 @@ const createEvent = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllEvents = catchAsync(async (req: Request, res: Response) => {
+  
   const events = await eventService.getAllEvents(req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Events fetched successfully',
+    data: events,
+  });
+});
+
+const getAllEventss = catchAsync(async (req: Request, res: Response) => {
+  
+  const events = await eventService.getAllEventss(req.query,true);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'All events fetched successfully',
     data: events,
   });
 });
@@ -104,6 +117,7 @@ const softDeleteEvent = catchAsync(async (req: Request, res: Response) => {
 export const eventController = {
   createEvent,
   getAllEvents,
+  getAllEventss,
   getSpecificCategoryEvents,
   getSpecificEvent,
   getUpcomingEventOfSpecificUser,
