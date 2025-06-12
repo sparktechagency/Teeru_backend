@@ -12,7 +12,7 @@ const userValidationSchema = z.object({
       .min(6, { message: 'Password must be at least 6 characters long' }),
     phone: z
       .string()
-      .min(10, { message: 'Phone number must be at least 10 digits' })
+      // .min(10, { message: 'Phone number must be at least 10 digits' })
       .optional(),
     about: z.string().optional(),
     profileImage: z.string().optional(),
