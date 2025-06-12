@@ -130,7 +130,7 @@ const forgotPasswordByEmail = async (email: string) => {
     });
   });
 
-  return  forgetToken ;
+  return { forgetToken };
 };
 
 // forgot Password by number
