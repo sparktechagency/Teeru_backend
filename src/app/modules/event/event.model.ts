@@ -37,12 +37,26 @@ const EventSchema = new Schema<IEvent>(
       required: true,
     },
     ticketPrices: {
-      tribune: { type: Number, default: 0 },
-      annexeLoge: { type: Number, default: 0 },
-      logeVIP: { type: Number, default: 0 },
-      logeVVIP: { type: Number, default: 0 },
-      serviceFee: { type: Number, default: 0 },
-      processingFee: { type: Number, default: 0 },
+      tribune: {
+        price: { type: Number, default: 0 },
+        serviceFee: { type: Number, default: 0 },
+        processingFee: { type: Number, default: 0 },
+      },
+      annexeLoge: {
+        price: { type: Number, default: 0 },
+        serviceFee: { type: Number, default: 0 },
+        processingFee: { type: Number, default: 0 },
+      },
+      logeVIP: {
+        price: { type: Number, default: 0 },
+        serviceFee: { type: Number, default: 0 },
+        processingFee: { type: Number, default: 0 },
+      },
+      logeVVIP: {
+        price: { type: Number, default: 0 },
+        serviceFee: { type: Number, default: 0 },
+        processingFee: { type: Number, default: 0 },
+      }
     },
     isDeleted: {
       type: Boolean,

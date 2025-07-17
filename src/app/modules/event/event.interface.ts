@@ -1,12 +1,15 @@
 import { ObjectId } from "mongoose";
-
-type TTicketPrices = {
-  tribune: number;
-  annexeLoge: number;
-  logeVIP: number;
-  logeVVIP: number;
+export interface ITicketPrice {
+  price: number;
   serviceFee: number;
   processingFee: number;
+}
+
+type TTicketPrices = {
+  tribune: ITicketPrice
+  annexeLoge: ITicketPrice;
+  logeVIP: ITicketPrice;
+  logeVVIP: ITicketPrice;
 };
 
 export interface IEvent {
