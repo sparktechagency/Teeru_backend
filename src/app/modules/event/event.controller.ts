@@ -46,6 +46,20 @@ const getAllEventss = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getUpcomingEvents = catchAsync( async (req: Request, res: Response) => {
+   
+
+    const upcomingEvents = await eventService.getUpcomingEvents();
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Upcoming events fetched successfully',
+      data: upcomingEvents,
+    });
+  }
+);
+
 const getSpecificCategoryEvents = catchAsync(async (req: Request, res: Response) => {
 
   const {categoryId} = req.params;
@@ -120,6 +134,7 @@ export const eventController = {
   getAllEventss,
   getSpecificCategoryEvents,
   getSpecificEvent,
+  getUpcomingEvents,
   getUpcomingEventOfSpecificUser,
   updateEvent,
   softDeleteEvent,

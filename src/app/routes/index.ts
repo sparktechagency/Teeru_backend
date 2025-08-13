@@ -9,6 +9,7 @@ import { eventRoutes } from "../modules/event/event.route";
 import { reviewRoutes } from "../modules/review/review.route";
 import { ticketRoutes } from "../modules/ticket/ticket.route";
 import { paymentRoutes } from "../modules/payment/payment.route";
+import { slidingTextRoutes } from "../modules/slidingText/slidingText.route";
 
 const router = Router();
 
@@ -53,6 +54,10 @@ const moduleRoutes = [
 {
   path: "/earnings",
   route: paymentRoutes
+},
+{
+  path: "/slidingText",
+  route: slidingTextRoutes
 }
 ];
 

@@ -87,6 +87,30 @@ const getSpecificEvent = async (id: string) => {
   return event;
 };
 
+const getUpcomingEvents = async () => {
+  const now = new Date();
+
+  // Get today's date without time
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const currentTime = now.toTimeString().slice(0, 5); // "HH:mm"
+
+  // Fetch events where:
+  // - date is in the future, OR
+  // - date is today but time is later than now
+  const upcomingEvents = await Event.find({
+    isDeleted: false,
+    $or: [
+      { date: { $gt: today } },
+      { date: today, time: { $gt: currentTime } }
+    ]
+  })
+    .populate('category')
+    .sort({ date: 1, time: 1 }); // Soonest first
+
+  return upcomingEvents;
+};
+
+
 const getUpcomingEventOfSpecificUser = async (userId: string) => {
   const now = new Date();
 
@@ -138,6 +162,7 @@ export const eventService = {
   updateEvent,
   getAllEvents,
   getAllEventss,
+  getUpcomingEvents,
   getSpecificCategoryEvents,
   getUpcomingEventOfSpecificUser,
   getSpecificEvent,
