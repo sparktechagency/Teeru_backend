@@ -31,7 +31,7 @@ eventRoutes
 
   .get(
     "/upcoming",
-    auth("user", "admin"),
+    // auth("user", "admin"),
     eventController.getUpcomingEvents
   )
 
